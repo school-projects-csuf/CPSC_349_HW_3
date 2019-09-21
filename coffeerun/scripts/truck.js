@@ -1,4 +1,4 @@
-/*(function(window) {
+(function(window) {
   'use strict';
   //code here
   var App = window.App || {};
@@ -9,25 +9,28 @@
     this.db = db;
   }
 
+
   Truck.prototype.createOrder = function (order) {
-    console.log("Adding order for" + order.emailAddress);
+    console.log("Adding order for " + order.emailAddress);
     this.db.add(order.emailAddress, order);
-  }
+  };
 
-  Truck.prototype.deliverOrder = function (order) {
-    console.log("Delivering order for" + order.emailAddress);
-    this.db.remove(order.emailAddress, order);
-  }
+  Truck.prototype.deliverOrder = function (customerId) {
+    console.log("Delivering order for " + customerId);
+    this.db.remove(customerId);
+  };
 
-  Truck.prototype.printOrders = function (order)
-    var customerIdArra = Object.keys(this.db.getAll());
-    console.log("Truck #" + this.truckId + " has a pending order");
+  Truck.prototype.printOrders = function () {
+    var customerIdArray = Object.keys(this.db.getAll());
 
+    console.log("Truck #" + this.truckId + " has a pending order: ");
 
-    this.db.add(order.emailAddress, order);
-  }
+    customerIdArray.forEach(function (id) {
+          console.log(this.db.get(id));
+        }.bind(this));
+  };
+
 
   App.Truck = Truck;
   window.App = App;
 })(window);
-*/
